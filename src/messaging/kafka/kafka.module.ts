@@ -35,5 +35,6 @@ import { KafkaMessagingController } from './kafka.controller';
   ],
   controllers: [KafkaMessagingController],
   providers: [KafkaMessagingService],
+  exports: [KafkaMessagingService],
 })
 export class KafkaMessagingModule {}

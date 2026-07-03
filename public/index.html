@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>smr-template-e2e · module test console</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font:
+          14px/1.5 -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
+        margin: 0;
+        padding: 24px;
+        max-width: 1100px;
+        margin-inline: auto;
+        background: #0f1220;
+        color: #e6e8f0;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0 0 4px;
+      }
+      .sub {
+        color: #9aa4bf;
+        margin-bottom: 20px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .card {
+        background: #171a2b;
+        border: 1px solid #262a41;
+        border-radius: 12px;
+        padding: 16px;
+      }
+      .card h2 {
+        font-size: 14px;
+        margin: 0 0 12px;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        color: #b9c0db;
+      }
+      label {
+        display: block;
+        font-size: 12px;
+        color: #9aa4bf;
+        margin: 8px 0 2px;
+      }
+      input {
+        width: 100%;
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid #2d3350;
+        background: #0f1220;
+        color: #e6e8f0;
+      }
+      button {
+        margin-top: 12px;
+        margin-right: 8px;
+        padding: 8px 14px;
+        border: 0;
+        border-radius: 8px;
+        background: #4f6bff;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button.secondary {
+        background: #2d3350;
+      }
+      button:hover {
+        filter: brightness(1.08);
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+      }
+      .row > * {
+        flex: 1;
+      }
+      .pill {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .pill.ok {
+        background: #123d2b;
+        color: #4ade80;
+      }
+      .pill.bad {
+        background: #3d1220;
+        color: #f87171;
+      }
+      .pill.cache {
+        background: #3d3312;
+        color: #fbbf24;
+      }
+      .pill.db {
+        background: #12293d;
+        color: #60a5fa;
+      }
+      pre {
+        background: #0b0e1a;
+        border: 1px solid #262a41;
+        border-radius: 8px;
+        padding: 12px;
+        overflow: auto;
+        max-height: 320px;
+        font-size: 12px;
+      }
+      .muted {
+        color: #6b7392;
+        font-size: 12px;
+      }
+      code {
+        color: #a5b4fc;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>smr-template-e2e · module test console</h1>
+    <div class="sub">
+      Exercises every wired backend module. Token:
+      <span id="tokState" class="pill bad">no token</span> &nbsp;·&nbsp; Health:
+      <span id="health" class="pill bad">unknown</span>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>1 · Auth (JWT + bcrypt)</h2>
+        <label>Email</label>
+        <input id="email" value="dev@example.com" />
+        <label>Password</label>
+        <input id="password" type="password" value="Sup3rSecret!" />
+        <div>
+          <button data-action="register">Register</button>
+          <button class="secondary" data-action="login">Login</button>
+          <button class="secondary" data-action="me">GET /auth/me</button>
+        </div>
+        <p class="muted">
+          Register/login return a JWT; it's stored and sent as
+          <code>Authorization: Bearer</code>.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>2 · Create order (DB + queue + messaging + tracing)</h2>
+        <div class="row">
+          <div>
+            <label>Customer</label><input id="customer" value="Acme Corp" />
+          </div>
+          <div><label>Item</label><input id="item" value="Widget" /></div>
+        </div>
+        <div class="row">
+          <div>
+            <label>Quantity</label
+            ><input id="quantity" type="number" value="3" />
+          </div>
+          <div>
+            <label>Amount</label
+            ><input id="amount" type="number" value="49.9" />
+          </div>
+        </div>
+        <button data-action="createOrder">POST /orders (auth)</button>
+        <p class="muted">
+          Persists to Postgres, enqueues a BullMQ job, publishes to RabbitMQ +
+          Kafka, warms Redis, opens an OTel span.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>3 · Read orders (cache-aside)</h2>
+        <button data-action="listOrders">GET /orders</button>
+        <label>Order id</label>
+        <input id="orderId" placeholder="paste an order id" />
+        <button class="secondary" data-action="getOrder">
+          GET /orders/:id
+        </button>
+        <p class="muted">
+          First read is a <span class="pill db">db</span> miss; the next is a
+          <span class="pill cache">cache</span> hit (watch
+          <code>_source</code>).
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Response log</h2>
+        <button class="secondary" data-action="clear">Clear</button>
+        <pre id="log"></pre>
+      </div>
+    </div>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
