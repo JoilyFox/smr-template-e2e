@@ -22,7 +22,8 @@ async function bootstrap(): Promise<void> {
 
   // CORS. Defaults to http://localhost:3000 for safe local dev. In production set
   // CORS_ORIGIN to your real origin(s); use a comma-separated list for several.
-  const corsOrigin = config.get<string>('corsOrigin') ?? 'http://localhost:3000';
+  const corsOrigin =
+    config.get<string>('corsOrigin') ?? 'http://localhost:3000';
   app.enableCors({
     origin: corsOrigin.includes(',')
       ? corsOrigin.split(',').map((o) => o.trim())
