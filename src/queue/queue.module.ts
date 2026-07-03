@@ -37,5 +37,6 @@ import { DemoProcessor, DEMO_QUEUE } from './queue.processor';
   ],
   controllers: [QueueController],
   providers: [QueueService, DemoProcessor],
+  exports: [QueueService],
 })
 export class QueueModule {}

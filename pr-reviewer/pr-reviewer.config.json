@@ -1,14 +1,14 @@
 {
   "git": {
     "provider": "github",
-    "repository": "company/repository",
+    "repository": "JoilyFox/smr-template-e2e",
     "mainBranch": "main"
   },
   "jira": {
     "enabled": true,
-    "baseUrl": "https://company.atlassian.net",
-    "projectKey": "PROJ",
-    "ticketRegex": "PROJ-\\d+"
+    "baseUrl": "https://bohdanfstack.atlassian.net",
+    "projectKey": "SCRUM",
+    "ticketRegex": "SCRUM-\\d+"
   },
   "ai": {
     "provider": "anthropic",

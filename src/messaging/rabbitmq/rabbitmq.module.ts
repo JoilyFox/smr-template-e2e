@@ -34,5 +34,6 @@ import { RabbitMessagingController } from './rabbitmq.controller';
   ],
   controllers: [RabbitMessagingController],
   providers: [RabbitMessagingService],
+  exports: [RabbitMessagingService],
 })
 export class RabbitMessagingModule {}

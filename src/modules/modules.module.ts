@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { ExampleModule } from './example/example.module';
+import { OrdersModule } from './orders/orders.module';
 
 /**
  * Aggregator for YOUR feature modules.
@@ -12,6 +15,11 @@ import { ExampleModule } from './example/example.module';
  * This file is YOUR code — unlike `generated.module.ts`, the generator never overwrites it.
  */
 @Module({
-  imports: [ExampleModule],
+  imports: [
+    // Serve the static module-test console at `/` (public/index.html).
+    ServeStaticModule.forRoot({ rootPath: join(process.cwd(), 'public') }),
+    ExampleModule,
+    OrdersModule,
+  ],
 })
 export class ModulesModule {}
