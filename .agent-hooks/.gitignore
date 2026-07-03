@@ -1,0 +1,2 @@
+# Per-developer hook overrides — never commit these (they'd override everyone's settings).
+config.local.json

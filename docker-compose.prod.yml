@@ -1,0 +1,17 @@
+# Production overlay — adds the application container on top of the infra services
+# (database / cache / broker) declared in docker-compose.yml.
+#
+# Deploy (the deploy workflow does this for you on the VPS):
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#
+# When the stack has no infra services there is no docker-compose.yml; in that case
+# just use this file on its own.
+services:
+  app:
+    # Set by the deploy workflow to the freshly pushed GHCR image.
+    image: ${APP_IMAGE:-app:latest}
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - '${PORT:-3000}:3000'

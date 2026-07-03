@@ -1,0 +1,15 @@
+{
+  "//": "Per-developer git-hook overrides. Copy this file to `config.local.json` (gitignored) and",
+  "//2": "change only what you want. It is deep-merged OVER config.json, so your settings never affect",
+  "//3": "the team. Use the `enabled` map to turn any git hook off locally — e.g. skip the slow",
+  "//4": "pre-push checks on a laptop:",
+  "enabled": {
+    "typecheck": false,
+    "test": false,
+    "build": false
+  },
+  "//5": "You can also override any behavior, e.g. allow longer commit subjects for yourself:",
+  "commitlint": {
+    "maxSubjectLength": 120
+  }
+}

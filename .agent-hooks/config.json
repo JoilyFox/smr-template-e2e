@@ -1,0 +1,41 @@
+{
+  "enabled": {
+    "guard": true,
+    "secrets": true,
+    "context": true,
+    "notify": true
+  },
+  "guard": {
+    "denyPaths": [
+      "**/.env",
+      "**/.env.*",
+      "**/*.pem",
+      "**/*.key",
+      "**/id_rsa*",
+      "**/id_ed25519*",
+      "**/migrations/**",
+      "**/*.sqlite",
+      "**/secrets/**"
+    ],
+    "allowPaths": ["**/.env.example", "**/.env.sample", "**/.env.template"],
+    "denyBash": [
+      "\\brm\\s+-[a-zA-Z]*[rf][a-zA-Z]*\\b[^\\n]*\\s(/|~|\\*|\\$HOME|\\.\\.)(\\s|/|$)",
+      "\\bgit\\s+push\\b.*(--force|--force-with-lease|-f)\\b.*\\b(main|master|prod|production|release)\\b",
+      "\\bgit\\s+push\\b.*\\b(main|master|prod|production|release)\\b.*(--force|--force-with-lease|-f)\\b",
+      "\\bgit\\s+reset\\s+--hard\\b.*\\b(origin/)?(main|master)\\b",
+      "\\b(DROP\\s+DATABASE|DROP\\s+TABLE|TRUNCATE\\s+TABLE)\\b",
+      "\\b(kubectl|helm)\\b.*\\b(delete|uninstall|destroy)\\b.*\\b(prod|production)\\b"
+    ]
+  },
+  "secrets": {
+    "failIfGitleaksMissing": false,
+    "regexFallback": true
+  },
+  "notify": {
+    "desktop": true,
+    "channel": "ntfy",
+    "ntfyServer": "https://ntfy.sh",
+    "ntfyTopic": "",
+    "minSecondsBetween": 30
+  }
+}

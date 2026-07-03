@@ -1,0 +1,22 @@
+{
+  "git": {
+    "provider": "github",
+    "repository": "company/repository",
+    "mainBranch": "main"
+  },
+  "jira": {
+    "enabled": true,
+    "baseUrl": "https://company.atlassian.net",
+    "projectKey": "PROJ",
+    "ticketRegex": "PROJ-\\d+"
+  },
+  "ai": {
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-5"
+  },
+  "rules": {
+    "minScoreToSuggest": 20,
+    "minScoreToPrompt": 50,
+    "minScoreToAutoComment": 80
+  }
+}

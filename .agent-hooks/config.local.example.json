@@ -1,0 +1,15 @@
+{
+  "//": "Per-developer overrides for the AGENT hooks (Claude Code). Copy this file to",
+  "//2": "`config.local.json` (gitignored) and change only what you want. It is deep-merged OVER",
+  "//3": "config.json, so your local settings never affect the team. Use the `enabled` map to turn any",
+  "//4": "agent hook off locally — e.g. mute session-start context + notifications:",
+  "enabled": {
+    "context": false,
+    "notify": false
+  },
+  "//5": "You can also override any detailed setting, e.g. point notify at your own phone topic:",
+  "notify": {
+    "ntfyTopic": "my-private-topic-abc123"
+  },
+  "//6": "NOTE: git-hook toggles live in a separate file — .githooks/config.local.json."
+}

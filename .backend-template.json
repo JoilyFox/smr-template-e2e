@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "appName": "smr-template-e2e",
+  "options": {
+    "db": "postgres",
+    "orm": "prisma",
+    "cache": "redis",
+    "authStrategies": [
+      "jwt",
+      "google"
+    ],
+    "logger": "pino",
+    "queue": "bullmq",
+    "messaging": [
+      "rabbitmq",
+      "kafka"
+    ],
+    "observability": "otel",
+    "cicd": "github",
+    "aiHooks": [
+      "guard",
+      "secrets",
+      "context",
+      "notify"
+    ],
+    "gitHooks": [
+      "format",
+      "secrets",
+      "no-commit-to-main",
+      "commitlint",
+      "typecheck",
+      "test",
+      "build"
+    ],
+    "tools": [
+      "atomic-wiki",
+      "pr-reviewer"
+    ],
+    "withExamples": true,
+    "packageManager": "npm"
+  }
+}

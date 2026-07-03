@@ -1,0 +1,42 @@
+{
+  "enabled": {
+    "format": true,
+    "secrets": true,
+    "no-commit-to-main": true,
+    "commitlint": true,
+    "typecheck": true,
+    "test": true,
+    "build": true
+  },
+  "secrets": {
+    "failIfGitleaksMissing": false
+  },
+  "no-commit-to-main": {
+    "branches": ["main", "master"]
+  },
+  "commitlint": {
+    "types": [
+      "feat",
+      "fix",
+      "docs",
+      "style",
+      "refactor",
+      "perf",
+      "test",
+      "build",
+      "ci",
+      "chore",
+      "revert"
+    ],
+    "maxSubjectLength": 100
+  },
+  "typecheck": {
+    "tsconfig": "tsconfig.json"
+  },
+  "test": {
+    "runner": "auto"
+  },
+  "build": {
+    "script": "build"
+  }
+}
