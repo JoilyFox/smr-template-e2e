@@ -8,4 +8,10 @@ export class HealthController {
   check(): { status: string; timestamp: string } {
     return { status: 'ok', timestamp: new Date().toISOString() };
   }
+
+  /** Kubernetes-style readiness probe. */
+  @Get('ready')
+  ready(): { status: string; uptime: number } {
+    return { status: 'ready', uptime: process.uptime() };
+  }
 }
